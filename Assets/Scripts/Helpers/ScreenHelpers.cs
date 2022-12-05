@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScreenHelpers
 {
-    public static bool ObjectNah(Vector3 objPos) {
+    public static bool IsPositionOnScreen(Vector3 objPos) {
         Vector3 convPosition = Camera.main.WorldToScreenPoint(objPos);
         if (convPosition.x > 0 
             && convPosition.x < Screen.width 
