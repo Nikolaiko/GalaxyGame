@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4748738683010320707}
   - component: {fileID: 6413470970768780542}
   - component: {fileID: 3215036615967332273}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpaceShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 1305574411362599221}
   - component: {fileID: 2521096004049610720}
   - component: {fileID: 4594804201328257544}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftExhaust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 7401504142496896996}
   - component: {fileID: 7987898448621544204}
   - component: {fileID: 7383635895392758183}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightExhaust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,6 +326,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightPlayerBarrel
       objectReference: {fileID: 0}
+    - target: {fileID: 228981385094917383, guid: c819e0d18fae04298aa06774908930a1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113243373967574591, guid: c819e0d18fae04298aa06774908930a1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1429941485807444810, guid: c819e0d18fae04298aa06774908930a1, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -392,6 +400,14 @@ PrefabInstance:
     - target: {fileID: 228981385094917383, guid: c819e0d18fae04298aa06774908930a1, type: 3}
       propertyPath: m_Name
       value: LeftPlayerBarrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 228981385094917383, guid: c819e0d18fae04298aa06774908930a1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113243373967574591, guid: c819e0d18fae04298aa06774908930a1, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1429941485807444810, guid: c819e0d18fae04298aa06774908930a1, type: 3}
       propertyPath: m_RootOrder
