@@ -7,7 +7,7 @@ public class SimpleMovingObject : MonoBehaviour
     public MovingDirection direction;
     public float movingSpeed;
 
-    public virtual void Update()
+    public virtual void FixedUpdate()
     {
         Vector3 newPosition = Vector3.zero;
 

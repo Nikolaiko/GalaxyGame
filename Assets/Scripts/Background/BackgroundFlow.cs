@@ -15,8 +15,7 @@ public class BackgroundFlow : MonoBehaviour
 
     void Update()
     {
-        if (mainBackRenderer != null) {
-            print("Update!");
+        if (mainBackRenderer != null) {            
             mainBackRenderer.material.mainTextureOffset = new Vector2(0f, 0.1f * Time.time);
         }        
     }

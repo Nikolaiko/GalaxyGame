@@ -6,9 +6,9 @@ public class SimpleBullet : SimpleMovingObject
 {
     public int damage;
 
-    public override void Update()
+    public override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
         if (!ScreenHelpers.IsPositionOnScreen(transform.position)) {
             Destroy(gameObject);
         }

@@ -9,7 +9,7 @@ public class SpaceShip : MonoBehaviour
     public GameObject rightBarrel;
     public GameObject bulletOriginal;
 
-    private float speed = 0.04f;    
+    private float speed = 0.4f;    
     private float halfWidth;
     private BarrelFireEffectScript leftBarrelEffect;
     private BarrelFireEffectScript rightBarrelEffect;
@@ -21,7 +21,21 @@ public class SpaceShip : MonoBehaviour
         rightBarrelEffect = rightBarrel.GetComponent<BarrelFireEffectScript>();
     }
 
-    void Update()
+    void Update() {
+        if (Input.GetKeyUp(KeyCode.Space)) {
+            print("Shot");
+            GameObject left = Instantiate(bulletOriginal);
+            GameObject right = Instantiate(bulletOriginal);            
+
+            left.transform.position = leftBarrel.transform.position;
+            right.transform.position = rightBarrel.transform.position;
+
+            leftBarrelEffect.Shoot();
+            rightBarrelEffect.Shoot();
+        }
+    }
+
+    void FixedUpdate()
     {
         Vector3 newRPos = new Vector3(transform.position.x + speed, transform.position.y, 0);
         Vector3 newLPos = new Vector3(transform.position.x - speed, transform.position.y, 0);
@@ -41,18 +55,5 @@ public class SpaceShip : MonoBehaviour
                 transform.position = newLPos; 
             }
         }
-
-        if (Input.GetKeyUp(KeyCode.Space)) {
-            GameObject left = Instantiate(bulletOriginal);
-            GameObject right = Instantiate(bulletOriginal);
-
-            left.transform.position = leftBarrel.transform.position;
-            right.transform.position = rightBarrel.transform.position;
-
-            leftBarrelEffect.Shoot();
-            rightBarrelEffect.Shoot();
-        }
     }
-
-    
 }

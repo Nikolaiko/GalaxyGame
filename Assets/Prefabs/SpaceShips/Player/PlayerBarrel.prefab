@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1429941485807444810}
   - component: {fileID: 1406211766267693931}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8221068819831102654}
   - component: {fileID: 2391720097211380626}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShotEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
