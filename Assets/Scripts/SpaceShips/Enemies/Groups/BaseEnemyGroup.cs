@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseEnemyGroup : MonoBehaviour
+public class BaseEnemyGroup : MonoBehaviour, Destroyable
 {
     public bool isDead = false;
 
@@ -10,7 +10,8 @@ public class BaseEnemyGroup : MonoBehaviour
         transform.position = newPosition;
     }
 
-    public void destroyGroup() {
+    public virtual void destroyObject()
+    {
         Destroy(gameObject);
     }
 }

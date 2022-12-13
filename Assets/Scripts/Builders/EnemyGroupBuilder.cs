@@ -9,25 +9,32 @@ public class EnemyGroupBuilder : MonoBehaviour
 
     private List<BaseEnemyGroup> createdGroups = new List<BaseEnemyGroup>();
 
-    public BaseEnemyGroup buildEnemyGroup(EnemyGroupType groupType) {        
+    public BaseEnemyGroup buildEnemyGroup(EnemyGroupType groupType) {
+        BaseEnemyGroup createdGroup;
         switch(groupType) {
             case EnemyGroupType.passive:
             {
-                return Instantiate(passiveGroup).GetComponent<BaseEnemyGroup>();            
+                createdGroup = Instantiate(passiveGroup).GetComponent<BaseEnemyGroup>();            
+                break;
             }
             case EnemyGroupType.shooting:
             {
-                return Instantiate(passiveGroup).GetComponent<BaseEnemyGroup>();                
+                createdGroup = Instantiate(passiveGroup).GetComponent<BaseEnemyGroup>();
+                break;
             }
             default:
             {
-                return Instantiate(passiveGroup).GetComponent<BaseEnemyGroup>();
+                createdGroup = Instantiate(passiveGroup).GetComponent<BaseEnemyGroup>();
+                break;
             }
-        }        
+        }
+        createdGroups.Add(createdGroup);
+        return createdGroup;
     }
 
     public void removeAllGroups() {
-        createdGroups.ForEach(group => group.destroyGroup());
+        createdGroups.RemoveAll(group => group == null);
+        createdGroups.ForEach(group => group.destroyObject());
         createdGroups.Clear();
     }
 }

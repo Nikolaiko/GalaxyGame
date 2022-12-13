@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceShip : MonoBehaviour
+public class SpaceShip : MonoBehaviour, Destroyable
 {
     public SpriteRenderer spriteRenderer;
     public GameObject leftBarrel;
@@ -55,5 +55,10 @@ public class SpaceShip : MonoBehaviour
                 transform.position = newLPos; 
             }
         }
+    }
+
+    public void destroyObject()
+    {
+        Destroy(gameObject);
     }
 }
