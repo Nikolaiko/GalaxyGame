@@ -11,10 +11,20 @@ public class PassiveEnemiesGroup : BaseEnemyGroup
 
     void Awake() {        
         ships = new List<BaseEnemyShip>(GetComponentsInChildren<BaseEnemyShip>());
+        foreach (BaseEnemyShip ship in ships) {
+            ship.OnShipDestroy += OnShipDestroy;
+        }
     }
 
     void FixedUpdate()
     {
+        List<BaseEnemyShip> deadShips = ships.FindAll(currentShip => currentShip.shipAlive() == false);
+        ships.RemoveAll(item => deadShips.Contains(item) == true);
+
+        foreach(BaseEnemyShip deadShip in deadShips) {
+            deadShip.destroyShip();
+        }
+
         ships.RemoveAll(item => item == null);
         if (ships.Count == 0) {
             isDead = true;
@@ -54,6 +64,10 @@ public class PassiveEnemiesGroup : BaseEnemyGroup
                 }
             }
         }        
+    }
+
+    protected void OnShipDestroy(BaseEnemyShip ship) {
+        ship.setAlive(false);
     }
 
     protected float GetMostLeftPosition(List<BaseEnemyShip> groupShips) {

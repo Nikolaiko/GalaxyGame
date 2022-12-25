@@ -9,17 +9,19 @@ public class MapManager : MonoBehaviour
     private List<LevelData> levels;
 
     public void Awake() {
-       levels = repository.getUserLevelData();
+        repository.initRepository();
+        levels = repository.getUserLevelsData();
 
-       MapLevelItem[] levelObjects = FindObjectsOfType<MapLevelItem>();
-       for(int i = 0; i < levelObjects.Length; i++) {
-        LevelData data = levels.Find(item => item.levelNumber == levelObjects[i].levelNumber);
-        if (data != null && data.state == LevelState.notAvailable) {
-            levelObjects[i].hide();
-        } else {
-            levelObjects[i].show();
+        MapLevelItem[] levelObjects = FindObjectsOfType<MapLevelItem>();
+        for(int i = 0; i < levelObjects.Length; i++) {
+            LevelData data = levels.Find(item => item.levelNumber == levelObjects[i].levelNumber);
+            levelObjects[i].setImageFromState(data.state);
+            if (data != null && data.state == LevelState.notAvailable) {
+                levelObjects[i].hide();
+            } else {
+                levelObjects[i].show();
+            }
         }
-       }
     }
 
     public void startLevel(int levelNumber) {

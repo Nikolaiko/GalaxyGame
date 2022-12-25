@@ -11,12 +11,18 @@ public class LevelManager : MonoBehaviour
     public GameObject enemyStartingPoint;
     public GameObject playerStartingPoint;
 
+    private UserDataRepository userDataRepository = new UserDataRepository();
+    private int levelNumber;
+
     private List<EnemyGroupType> levelGroups = new List<EnemyGroupType>();
     private BaseEnemyGroup currentGroup;
     private SpaceShip playerShip;
 
     void Start()
     {
+        userDataRepository.initRepository();
+        levelNumber = userDataRepository.getCurrentLevel();
+
         initEnemyGroups();
         buildPlayerShip();
         createNextGroup();
@@ -32,6 +38,8 @@ public class LevelManager : MonoBehaviour
                 playerShip.destroyObject();
                 enemyGroupBuilder.removeAllGroups();
                 uiManager.showWinScreen();
+
+                userDataRepository.setLevelState(levelNumber, LevelState.completedOneStar);                
             }      
         } 
     }

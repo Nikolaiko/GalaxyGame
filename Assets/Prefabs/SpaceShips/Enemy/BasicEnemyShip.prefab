@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3455343665028797784}
   - component: {fileID: 3347854414443942017}
   - component: {fileID: 444849367767476284}
+  - component: {fileID: 2242930008228396515}
   m_Layer: 7
   m_Name: BasicEnemyShip
   m_TagString: Untagged
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85c8591f96584ee68c10810528cdb34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exhaustObject: {fileID: 6493554689451872528}
 --- !u!60 &444849367767476284
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -243,6 +245,26 @@ PolygonCollider2D:
       - {x: 0.32, y: -0.97249997}
       - {x: 0.5, y: -0.7575}
       - {x: 0.5125, y: -0.7425}
+--- !u!95 &2242930008228396515
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4911342003118079505}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e3aee3f742b624988addb29bfbdedc66, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6493554689451872528
 GameObject:
   m_ObjectHideFlags: 0
