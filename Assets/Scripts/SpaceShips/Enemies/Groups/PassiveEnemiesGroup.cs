@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class PassiveEnemiesGroup : BaseEnemyGroup
 {
-    private float speed = 0.1f;
-    private MovingDirection currentDirection = MovingDirection.left;
-    private List<BaseEnemyShip> ships = new List<BaseEnemyShip>();
+    protected float speed = 0.1f;
+    protected MovingDirection currentDirection = MovingDirection.left;
+    protected List<BaseEnemyShip> ships = new List<BaseEnemyShip>();
 
 
-    void Awake() {        
+    virtual public void Awake() {        
         ships = new List<BaseEnemyShip>(GetComponentsInChildren<BaseEnemyShip>());
         foreach (BaseEnemyShip ship in ships) {
             ship.OnShipDestroy += OnShipDestroy;
         }
     }
 
-    void FixedUpdate()
+    virtual public void FixedUpdate()
     {
         List<BaseEnemyShip> deadShips = ships.FindAll(currentShip => currentShip.shipAlive() == false);
         ships.RemoveAll(item => deadShips.Contains(item) == true);
@@ -27,7 +27,7 @@ public class PassiveEnemiesGroup : BaseEnemyGroup
 
         ships.RemoveAll(item => item == null);
         if (ships.Count == 0) {
-            isDead = true;
+            OnGroupDeath();
         } else {
             Vector3 newPosition = Vector3.zero;        
             if (currentDirection == MovingDirection.left) {
@@ -64,6 +64,10 @@ public class PassiveEnemiesGroup : BaseEnemyGroup
                 }
             }
         }        
+    }
+
+    virtual protected void OnGroupDeath() {
+        isDead = true;
     }
 
     protected void OnShipDestroy(BaseEnemyShip ship) {

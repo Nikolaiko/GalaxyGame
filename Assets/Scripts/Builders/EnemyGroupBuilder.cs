@@ -19,7 +19,7 @@ public class EnemyGroupBuilder : MonoBehaviour
             }
             case EnemyGroupType.shooting:
             {
-                createdGroup = Instantiate(passiveGroup).GetComponent<BaseEnemyGroup>();
+                createdGroup = Instantiate(shotingGroup).GetComponent<BaseEnemyGroup>();
                 break;
             }
             default:

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3510432635345129775}
   - component: {fileID: 2766515479245747638}
   - component: {fileID: 2298024529594993273}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Exhaust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: a54179e8c9709406997cff7082961548, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -117,7 +117,9 @@ GameObject:
   - component: {fileID: 7531470093583756833}
   - component: {fileID: 8049255967436552777}
   - component: {fileID: 6322840181048768201}
-  m_Layer: 0
+  - component: {fileID: -5781674003985676140}
+  - component: {fileID: 903305042986898700}
+  m_Layer: 7
   m_Name: BasicEnemyShotingShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,3 +459,37 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &-5781674003985676140
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9170834079089941367}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0e1711c93a41541a48f5c359d6aeb8b6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &903305042986898700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9170834079089941367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6186d7b0ff51d4a49ae71c6582b6b9cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exhaustObject: {fileID: 7297278958174902528}
+  bulletOriginal: {fileID: 3691138744631711715, guid: 32ba2a3e75caf44c08ceb00f9ee40867, type: 3}

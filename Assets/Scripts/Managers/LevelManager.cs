@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     public UILevelManager uiManager;
     public GameObject enemyStartingPoint;
     public GameObject playerStartingPoint;
-
+    
     private UserDataRepository userDataRepository = new UserDataRepository();
     private int levelNumber;
 
@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
     private SpaceShip playerShip;
 
     void Start()
-    {
+    {        
         userDataRepository.initRepository();
         levelNumber = userDataRepository.getCurrentLevel();
 
@@ -55,7 +55,8 @@ public class LevelManager : MonoBehaviour
     }
 
     private void initEnemyGroups() {
-        levelGroups.Add(EnemyGroupType.passive);
+        levelGroups.Add(EnemyGroupType.shooting);
+        levelGroups.Add(EnemyGroupType.shooting);
     }
 
     private void buildPlayerShip() {
