@@ -29,5 +29,7 @@ public class MapManager : MonoBehaviour
         SceneManager.LoadSceneAsync(SceneIDs.levelSceneId);
     }
 
-    
+    public void ExitGame() {
+        Application.Quit();
+    }
 }

@@ -6,6 +6,7 @@ public class EnemyGroupBuilder : MonoBehaviour
 {
     public GameObject passiveGroup;
     public GameObject shotingGroup;
+    public GameObject shotingRamGroup;
 
     private List<BaseEnemyGroup> createdGroups = new List<BaseEnemyGroup>();
 
@@ -20,6 +21,11 @@ public class EnemyGroupBuilder : MonoBehaviour
             case EnemyGroupType.shooting:
             {
                 createdGroup = Instantiate(shotingGroup).GetComponent<BaseEnemyGroup>();
+                break;
+            }
+            case EnemyGroupType.shootingRam:
+            {
+                createdGroup = Instantiate(shotingRamGroup).GetComponent<BaseEnemyGroup>();
                 break;
             }
             default:

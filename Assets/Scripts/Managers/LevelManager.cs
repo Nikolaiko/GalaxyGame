@@ -46,6 +46,7 @@ public class LevelManager : MonoBehaviour
 
     public void replayLevel() {
         uiManager.hideWinScreen();
+        uiManager.hideLooseScreen();
         Start();
     }
 
@@ -54,14 +55,19 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadSceneAsync(SceneIDs.mapSceneId);
     }
 
+    public void ExitGame() {
+        Application.Quit();
+    }
+
     private void initEnemyGroups() {
-        levelGroups.Add(EnemyGroupType.shooting);
-        levelGroups.Add(EnemyGroupType.shooting);
+        levelGroups.Add(EnemyGroupType.shootingRam);
+        levelGroups.Add(EnemyGroupType.shootingRam);
     }
 
     private void buildPlayerShip() {
         playerShip = playerShipBuilder.buildPlayerShip();
         playerShip.transform.position = playerStartingPoint.transform.position;
+        playerShip.OnPlayerDeath += OnPlayerDeath;
     }
 
     private void createNextGroup() {
@@ -72,5 +78,12 @@ public class LevelManager : MonoBehaviour
             currentGroup = enemyGroupBuilder.buildEnemyGroup(currentGroupType);
             currentGroup.setPosition(enemyStartingPoint.transform.position);
         }        
+    }
+
+    private void OnPlayerDeath(SpaceShip player) {
+        playerShip.destroyObject();
+        enemyGroupBuilder.removeAllGroups();
+
+        uiManager.showLooseScreen();
     }
 }

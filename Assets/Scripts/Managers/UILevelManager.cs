@@ -5,8 +5,7 @@ using UnityEngine;
 public class UILevelManager : MonoBehaviour
 {
     public GameObject winScreen;
-
-
+    public GameObject looseScreen;
 
     public void showWinScreen() {
         winScreen.SetActive(true);
@@ -14,5 +13,13 @@ public class UILevelManager : MonoBehaviour
 
     public void hideWinScreen() {
         winScreen.SetActive(false);
+    }
+
+    public void showLooseScreen() {
+        looseScreen.SetActive(true);
+    }
+
+    public void hideLooseScreen() {
+        looseScreen.SetActive(false);
     }
 }

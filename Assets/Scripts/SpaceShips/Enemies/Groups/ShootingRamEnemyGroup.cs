@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyGroupType
+public class ShootingRamEnemyGroup : ShotingEnemiesGroup
 {
-    passive,
-    shooting,
-    shootingRam
+    
 }

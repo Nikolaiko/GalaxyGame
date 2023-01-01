@@ -6,6 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class SpaceShip : MonoBehaviour, Destroyable
 {
+    public delegate void PlayerDeathDelegate(SpaceShip player);
+    public event PlayerDeathDelegate OnPlayerDeath;
+
     public SpriteRenderer spriteRenderer;
     public GameObject leftBarrel;
     public GameObject rightBarrel;
@@ -73,7 +76,7 @@ public class SpaceShip : MonoBehaviour, Destroyable
     }
 
     public void OnDestroyAnimationEnd() {
-        destroyObject();
+        OnPlayerDeath?.Invoke(this);
     }
 
     public void destroyObject()
@@ -92,7 +95,7 @@ public class SpaceShip : MonoBehaviour, Destroyable
                 rightExhaustObject.SetActive(false);
                 shipCollider.enabled = false;
                 
-                shipAnimation.SetBool("IsAlive", false);                
+                shipAnimation.SetBool("IsAlive", false);                                
             }
         }
     }

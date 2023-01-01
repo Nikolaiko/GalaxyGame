@@ -6,7 +6,7 @@ public class ShotingEnemiesGroup : PassiveEnemiesGroup
 {
     private static string shotingMethodName = "GroupShoot";
     private static float shotingDelay = 0.5f;
-    private static float shotinginterval = 1.0f;
+    private static float shotinginterval = 2.5f;
 
     protected List<ShotingEnemyShip> shotingShips = new List<ShotingEnemyShip>();
     protected System.Random generator = new System.Random();
