@@ -12,6 +12,7 @@ public class PassiveEnemiesGroup : BaseEnemyGroup
     virtual public void Awake() {        
         ships = new List<BaseEnemyShip>(GetComponentsInChildren<BaseEnemyShip>());
         foreach (BaseEnemyShip ship in ships) {
+            ship.OnShipDestroyAnimationComplete += OnShipAnimationDestroyComplete;
             ship.OnShipDestroy += OnShipDestroy;
         }
     }
@@ -22,7 +23,9 @@ public class PassiveEnemiesGroup : BaseEnemyGroup
         ships.RemoveAll(item => deadShips.Contains(item) == true);
 
         foreach(BaseEnemyShip deadShip in deadShips) {
-            deadShip.destroyShip();
+            deadShip.OnShipDestroy -= OnShipDestroy;
+            deadShip.OnShipDestroyAnimationComplete -= OnShipAnimationDestroyComplete;
+            deadShip.DestroyShipObject();
         }
 
         ships.RemoveAll(item => item == null);
@@ -70,8 +73,20 @@ public class PassiveEnemiesGroup : BaseEnemyGroup
         isDead = true;
     }
 
+    public override void DestroyObject()
+    {
+        foreach(BaseEnemyShip ship in ships) {
+            ship.DestroyShipObject();
+        }
+        base.DestroyObject();
+    }
+
+    protected void OnShipAnimationDestroyComplete(BaseEnemyShip ship) {
+        ship.SetAlive(false);        
+    }
+
     protected void OnShipDestroy(BaseEnemyShip ship) {
-        ship.setAlive(false);
+        InvokeDestroyShipEvent(ship.GetShipType());
     }
 
     protected float GetMostLeftPosition(List<BaseEnemyShip> groupShips) {

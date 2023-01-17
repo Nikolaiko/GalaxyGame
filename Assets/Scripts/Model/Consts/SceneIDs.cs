@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class SceneIDs
 {
-   public static int levelSceneId = 0;
-   public static int mapSceneId = 1;
+   public static int levelSceneId = 1;
+   public static int mapSceneId = 0;
 }

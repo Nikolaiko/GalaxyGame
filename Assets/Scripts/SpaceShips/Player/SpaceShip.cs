@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class SpaceShip : MonoBehaviour, Destroyable
 {
+    public const float MAX_HEALTH = 100.0f;
     public delegate void PlayerDeathDelegate(SpaceShip player);
     public event PlayerDeathDelegate OnPlayerDeath;
 
@@ -17,7 +18,7 @@ public class SpaceShip : MonoBehaviour, Destroyable
     public GameObject rightExhaustObject;
 
     private float speed = 0.4f;
-    private float health = 100.0f;
+    private float health = MAX_HEALTH;
     private float halfWidth;
     private BarrelFireEffectScript leftBarrelEffect;
     private BarrelFireEffectScript rightBarrelEffect;
@@ -79,24 +80,47 @@ public class SpaceShip : MonoBehaviour, Destroyable
         OnPlayerDeath?.Invoke(this);
     }
 
-    public void destroyObject()
-    {
+    public void DestroyObject() {
         Destroy(gameObject);
+    }
+
+    public void DestroyPlayerShip() {
+        leftExhaustObject.SetActive(false);
+        rightExhaustObject.SetActive(false);
+        shipCollider.enabled = false;
+                
+        shipAnimation.SetBool("IsAlive", false);
     }
 
     public void OnTriggerEnter2D(Collider2D otherCollider) {        
         GameObject otherObject = otherCollider.gameObject;
         SimpleBullet bullet = otherCollider.GetComponent<SimpleBullet>();
         if (bullet != null) {
-            health -= bullet.damage;
-            Destroy(otherObject);
-            if (health <= 0) {
-                leftExhaustObject.SetActive(false);
-                rightExhaustObject.SetActive(false);
-                shipCollider.enabled = false;
-                
-                shipAnimation.SetBool("IsAlive", false);                                
-            }
+            ProcessBulletCollision(bullet);
+            return;
+        }
+
+        BaseEnemyShip enemyShip = otherCollider.GetComponent<BaseEnemyShip>();        
+        if (enemyShip != null) {
+            ProcessSpaceShipCollision(enemyShip);
+            return;
+        }
+    }
+
+    public float GetHealth() {
+        return health;
+    }
+
+    private void ProcessSpaceShipCollision(BaseEnemyShip enemyShip) {
+        enemyShip.DestroyShip();
+        DestroyPlayerShip();
+    }
+
+    private void ProcessBulletCollision(SimpleBullet bullet) {
+        health -= bullet.damage;
+        Destroy(bullet.gameObject);
+        if (health <= 0) {
+            DestroyPlayerShip();
         }
     }
 }

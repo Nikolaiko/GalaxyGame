@@ -10,7 +10,7 @@ public class EnemyGroupBuilder : MonoBehaviour
 
     private List<BaseEnemyGroup> createdGroups = new List<BaseEnemyGroup>();
 
-    public BaseEnemyGroup buildEnemyGroup(EnemyGroupType groupType) {
+    public BaseEnemyGroup buildEnemyGroup(EnemyGroupType groupType, GameObject playerShip) {
         BaseEnemyGroup createdGroup;
         switch(groupType) {
             case EnemyGroupType.passive:
@@ -25,7 +25,9 @@ public class EnemyGroupBuilder : MonoBehaviour
             }
             case EnemyGroupType.shootingRam:
             {
-                createdGroup = Instantiate(shotingRamGroup).GetComponent<BaseEnemyGroup>();
+                ShootingRamEnemyGroup ramGroup = Instantiate(shotingRamGroup).GetComponent<ShootingRamEnemyGroup>();
+                ramGroup.SetTarget(playerShip);
+                createdGroup = ramGroup;
                 break;
             }
             default:
@@ -40,7 +42,7 @@ public class EnemyGroupBuilder : MonoBehaviour
 
     public void removeAllGroups() {
         createdGroups.RemoveAll(group => group == null);
-        createdGroups.ForEach(group => group.destroyObject());
+        createdGroups.ForEach(group => group.DestroyObject());
         createdGroups.Clear();
     }
 }

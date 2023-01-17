@@ -28,7 +28,10 @@ public class UserDataRepository
         int levelIndex = levelNumber - 1;
         int nextLevelIndex = levelNumber;
 
-        gameProgress.levels[levelIndex].state = newState;
+        
+        UpdateLevelProgress(levelIndex, newState);
+
+
         if (newState != LevelState.notAvailable && 
             newState != LevelState.notCompleted &&
             levelIndex < gameProgress.levels.Count - 1 && 
@@ -56,5 +59,26 @@ public class UserDataRepository
             PlayerPrefsKeyNames.userGameProgressKeyName, 
             JsonUtility.ToJson(gameProgress)
         );
+    }
+
+    private void UpdateLevelProgress(int levelIndex, LevelState newState) {
+        switch (newState) {
+            case LevelState.completedThreeStars:
+                gameProgress.levels[levelIndex].state = newState;
+                break;
+            case LevelState.completedTwoStarts:
+                if (gameProgress.levels[levelIndex].state != LevelState.completedThreeStars) {
+                    gameProgress.levels[levelIndex].state = newState;
+                }
+                break;
+            case LevelState.completedOneStar:
+                if (
+                    gameProgress.levels[levelIndex].state != LevelState.completedThreeStars &&
+                    gameProgress.levels[levelIndex].state != LevelState.completedTwoStarts
+                ) {
+                    gameProgress.levels[levelIndex].state = newState;
+                }
+                break;
+        }
     }
 }
