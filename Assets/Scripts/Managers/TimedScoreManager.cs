@@ -25,6 +25,9 @@ public class TimedScoreManager : MonoBehaviour, ScoreManager
             case EnemyShipType.ramming:
                 score =  EnemyShipScoreTable.RAMMING_SHIP;
                 break;
+            case EnemyShipType.searching:
+                score =  EnemyShipScoreTable.SEARCHING_SHIP;
+                break;
         }
         score -=  Mathf.RoundToInt(timeInterval);
         if (score <= 0) {

@@ -37,7 +37,7 @@ public class UILevelManager : MonoBehaviour
         looseScoreText.text = userText.text;
         looseScreen.SetActive(true);
 
-        userText.gameObject.SetActive(false);
+        userText.gameObject.SetActive(false);        
     }
 
     public void HideLooseScreen() {

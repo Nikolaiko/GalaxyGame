@@ -8,6 +8,8 @@ public class EnemyGroupBuilder : MonoBehaviour
     public GameObject shotingGroup;
     public GameObject shotingRamGroup;
 
+    public GameObject searchingGroup;
+
     private List<BaseEnemyGroup> createdGroups = new List<BaseEnemyGroup>();
 
     public BaseEnemyGroup buildEnemyGroup(EnemyGroupType groupType, GameObject playerShip) {
@@ -28,6 +30,11 @@ public class EnemyGroupBuilder : MonoBehaviour
                 ShootingRamEnemyGroup ramGroup = Instantiate(shotingRamGroup).GetComponent<ShootingRamEnemyGroup>();
                 ramGroup.SetTarget(playerShip);
                 createdGroup = ramGroup;
+                break;
+            }
+            case EnemyGroupType.searching:
+            {
+                createdGroup = Instantiate(searchingGroup).GetComponent<RoundSearchingGroup>();                                 
                 break;
             }
             default:

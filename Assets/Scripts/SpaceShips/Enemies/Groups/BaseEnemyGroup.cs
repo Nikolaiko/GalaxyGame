@@ -9,6 +9,8 @@ public class BaseEnemyGroup : MonoBehaviour, Destroyable
 
     public bool isDead = false;
 
+    protected List<BaseEnemyShip> ships = new List<BaseEnemyShip>();
+
     public void setPosition(Vector3 newPosition) {
         transform.position = newPosition;
     }
@@ -16,6 +18,18 @@ public class BaseEnemyGroup : MonoBehaviour, Destroyable
     public virtual void DestroyObject()
     {
         Destroy(gameObject);
+    }
+
+    virtual protected void OnGroupDeath() {
+        isDead = true;
+    }
+
+    protected void OnShipAnimationDestroyComplete(BaseEnemyShip ship) {
+        ship.SetAlive(false);        
+    }
+
+    protected void OnShipDestroy(BaseEnemyShip ship) {
+        InvokeDestroyShipEvent(ship.GetShipType());
     }
 
     protected void InvokeDestroyShipEvent(EnemyShipType shipType) {

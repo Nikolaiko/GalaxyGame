@@ -20,6 +20,7 @@ public class SpaceShip : MonoBehaviour, Destroyable
     private float speed = 0.4f;
     private float health = MAX_HEALTH;
     private float halfWidth;
+    private float halfHeight;
     private BarrelFireEffectScript leftBarrelEffect;
     private BarrelFireEffectScript rightBarrelEffect;
 
@@ -34,6 +35,8 @@ public class SpaceShip : MonoBehaviour, Destroyable
     void Start()
     {
         halfWidth = spriteRenderer.bounds.size.x / 2;
+        halfHeight = spriteRenderer.bounds.size.y / 2;
+
         leftBarrelEffect = leftBarrel.GetComponent<BarrelFireEffectScript>();
         rightBarrelEffect = rightBarrel.GetComponent<BarrelFireEffectScript>();
     }
@@ -58,8 +61,15 @@ public class SpaceShip : MonoBehaviour, Destroyable
 
         Vector3 newRPos = new Vector3(transform.position.x + speed, transform.position.y, 0);
         Vector3 newLPos = new Vector3(transform.position.x - speed, transform.position.y, 0);
+
+        Vector3 newUPos = new Vector3(transform.position.x, transform.position.y + speed, 0);
+        Vector3 newDPos = new Vector3(transform.position.x, transform.position.y - speed, 0);
+
         Vector3 checkLPos = new Vector3(newLPos.x - halfWidth, newLPos.y, 0);
         Vector3 checkRPos = new Vector3(newRPos.x + halfWidth, newRPos.y, 0);        
+
+        Vector3 checkUPos = new Vector3(newUPos.x, newUPos.y + halfHeight, 0);
+        Vector3 checkDPos = new Vector3(newDPos.x, newDPos.y - halfHeight, 0);        
 
         if (Input.GetKey(KeyCode.D)) {
             bool check = ScreenHelpers.IsPositionOnScreen(checkRPos);
@@ -72,6 +82,20 @@ public class SpaceShip : MonoBehaviour, Destroyable
             bool check = ScreenHelpers.IsPositionOnScreen(checkLPos);
             if (check) {
                 transform.position = newLPos; 
+            }
+        }
+
+        if (Input.GetKey(KeyCode.W)) {
+            bool check = ScreenHelpers.IsPositionOnScreen(checkUPos);
+            if (check) {
+                transform.position = newUPos; 
+            }
+        }
+
+        if (Input.GetKey(KeyCode.S)) {
+            bool check = ScreenHelpers.IsPositionOnScreen(checkDPos);
+            if (check) {
+                transform.position = newDPos; 
             }
         }
     }

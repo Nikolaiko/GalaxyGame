@@ -6,9 +6,7 @@ public class PassiveEnemiesGroup : BaseEnemyGroup
 {
     protected float speed = 0.1f;
     protected MovingDirection currentDirection = MovingDirection.left;
-    protected List<BaseEnemyShip> ships = new List<BaseEnemyShip>();
-
-
+    
     virtual public void Awake() {        
         ships = new List<BaseEnemyShip>(GetComponentsInChildren<BaseEnemyShip>());
         foreach (BaseEnemyShip ship in ships) {
@@ -69,24 +67,12 @@ public class PassiveEnemiesGroup : BaseEnemyGroup
         }        
     }
 
-    virtual protected void OnGroupDeath() {
-        isDead = true;
-    }
-
     public override void DestroyObject()
     {
         foreach(BaseEnemyShip ship in ships) {
             ship.DestroyShipObject();
         }
         base.DestroyObject();
-    }
-
-    protected void OnShipAnimationDestroyComplete(BaseEnemyShip ship) {
-        ship.SetAlive(false);        
-    }
-
-    protected void OnShipDestroy(BaseEnemyShip ship) {
-        InvokeDestroyShipEvent(ship.GetShipType());
     }
 
     protected float GetMostLeftPosition(List<BaseEnemyShip> groupShips) {

@@ -6,5 +6,6 @@ public enum EnemyGroupType
 {
     passive,
     shooting,
-    shootingRam
+    shootingRam,
+    searching
 }

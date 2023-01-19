@@ -79,7 +79,8 @@ public class LevelManager : MonoBehaviour
     }
 
     private void initEnemyGroups() {
-        levelGroups.Add(EnemyGroupType.shootingRam);
+        levelGroups.Clear();
+        levelGroups.Add(EnemyGroupType.searching);
         levelGroups.Add(EnemyGroupType.shootingRam);
     }
 

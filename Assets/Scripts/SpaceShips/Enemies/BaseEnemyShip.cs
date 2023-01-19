@@ -20,7 +20,7 @@ public class BaseEnemyShip : MonoBehaviour
     protected Animator shipAnimation;
     protected Collider2D shipCollider;
 
-    public void Awake() {
+    public virtual void Awake() {
         shipAnimation = GetComponent<Animator>();
         shipCollider = GetComponent<Collider2D>();
     }
