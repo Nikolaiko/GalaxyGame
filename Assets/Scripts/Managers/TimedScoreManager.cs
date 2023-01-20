@@ -28,6 +28,9 @@ public class TimedScoreManager : MonoBehaviour, ScoreManager
             case EnemyShipType.searching:
                 score =  EnemyShipScoreTable.SEARCHING_SHIP;
                 break;
+            case EnemyShipType.blueBoss:
+                score =  EnemyShipScoreTable.BLUE_BOSS_SHIP;
+                break;
         }
         score -=  Mathf.RoundToInt(timeInterval);
         if (score <= 0) {

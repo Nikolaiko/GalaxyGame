@@ -9,6 +9,7 @@ public class EnemyGroupBuilder : MonoBehaviour
     public GameObject shotingRamGroup;
 
     public GameObject searchingGroup;
+    public GameObject blueBossGroup;
 
     private List<BaseEnemyGroup> createdGroups = new List<BaseEnemyGroup>();
 
@@ -35,6 +36,11 @@ public class EnemyGroupBuilder : MonoBehaviour
             case EnemyGroupType.searching:
             {
                 createdGroup = Instantiate(searchingGroup).GetComponent<RoundSearchingGroup>();                                 
+                break;
+            }
+            case EnemyGroupType.blueBoss:
+            {
+                createdGroup = Instantiate(blueBossGroup).GetComponent<BlueBossGroup>();                                 
                 break;
             }
             default:

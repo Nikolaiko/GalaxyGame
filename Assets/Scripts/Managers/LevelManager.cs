@@ -80,7 +80,7 @@ public class LevelManager : MonoBehaviour
 
     private void initEnemyGroups() {
         levelGroups.Clear();
-        levelGroups.Add(EnemyGroupType.searching);
+        levelGroups.Add(EnemyGroupType.blueBoss);
         levelGroups.Add(EnemyGroupType.shootingRam);
     }
 

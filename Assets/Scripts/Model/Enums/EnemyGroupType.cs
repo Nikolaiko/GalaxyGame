@@ -7,5 +7,6 @@ public enum EnemyGroupType
     passive,
     shooting,
     shootingRam,
-    searching
+    searching,
+    blueBoss
 }

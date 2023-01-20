@@ -25,14 +25,10 @@ public class BaseEnemyGroup : MonoBehaviour, Destroyable
     }
 
     protected void OnShipAnimationDestroyComplete(BaseEnemyShip ship) {
-        ship.SetAlive(false);        
+        ship.SetAlive(false);   
     }
 
-    protected void OnShipDestroy(BaseEnemyShip ship) {
-        InvokeDestroyShipEvent(ship.GetShipType());
-    }
-
-    protected void InvokeDestroyShipEvent(EnemyShipType shipType) {
-        OnGroupShipDestroy?.Invoke(shipType);
+    protected virtual void OnShipDestroy(BaseEnemyShip ship) {
+        OnGroupShipDestroy?.Invoke(ship.GetShipType());
     }
 }

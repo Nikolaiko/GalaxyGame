@@ -3514,22 +3514,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3800180676759375048, guid: faf600ded792a4ea09dbff4b01e06f12, type: 3}
-      propertyPath: passiveGroup
-      value: 
-      objectReference: {fileID: 5550518165890151767, guid: e23ff92399995415790d6b52135e18e5, type: 3}
-    - target: {fileID: 3800180676759375048, guid: faf600ded792a4ea09dbff4b01e06f12, type: 3}
-      propertyPath: shotingGroup
-      value: 
-      objectReference: {fileID: 3117023176426810041, guid: 6d2dfc1f3943049d1a995578ddf75b48, type: 3}
-    - target: {fileID: 3800180676759375048, guid: faf600ded792a4ea09dbff4b01e06f12, type: 3}
-      propertyPath: searchingGroup
-      value: 
-      objectReference: {fileID: 3723537651014964500, guid: ed6f2878351fa4ad29c5c879e6d7d60e, type: 3}
-    - target: {fileID: 3800180676759375048, guid: faf600ded792a4ea09dbff4b01e06f12, type: 3}
-      propertyPath: shotingRamGroup
-      value: 
-      objectReference: {fileID: 5109541037125444279, guid: 4b855fb69d5714b209725268a597c6bc, type: 3}
     - target: {fileID: 7708970239816533306, guid: faf600ded792a4ea09dbff4b01e06f12, type: 3}
       propertyPath: m_Name
       value: EnemyGroupBuilder
