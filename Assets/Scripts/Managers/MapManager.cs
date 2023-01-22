@@ -22,7 +22,7 @@ public class MapManager : MonoBehaviour
                 levelObjects[i].hide();
             } else {
                 levelObjects[i].show();
-                if (i == 3) {
+                if (data.levelNumber == 4) {
                     bossIcon.SetActive(true);
                 }
             }
