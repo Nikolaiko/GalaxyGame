@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
 
     private ScoreManager scoreManager;
     private StarRatingManager ratingManager;
+    private EnemyGroupsConfigManager groupsConfigManager;
     private UserDataRepository userDataRepository = new UserDataRepository();
     private int levelNumber;
     private int userScore;
@@ -25,6 +26,7 @@ public class LevelManager : MonoBehaviour
     void Awake() {
         scoreManager = GetComponent<ScoreManager>();
         ratingManager = GetComponent<StarRatingManager>();
+        groupsConfigManager = GetComponent<EnemyGroupsConfigManager>();
     }
 
     void Start()
@@ -62,6 +64,7 @@ public class LevelManager : MonoBehaviour
 
     public void replayLevel() {
         userScore = 0;
+
         uiManager.SetUserScore(userScore);
         uiManager.HideWinScreen();
         uiManager.HideLooseScreen();
@@ -79,9 +82,7 @@ public class LevelManager : MonoBehaviour
     }
 
     private void initEnemyGroups() {
-        levelGroups.Clear();
-        levelGroups.Add(EnemyGroupType.blueBoss);
-        levelGroups.Add(EnemyGroupType.shootingRam);
+        levelGroups = groupsConfigManager.GetGroupTypesForLevel(levelNumber);                
     }
 
     private void buildPlayerShip() {
@@ -92,7 +93,7 @@ public class LevelManager : MonoBehaviour
 
     private void createNextGroup() {
         if (levelGroups.Count > 0) {
-            EnemyGroupType currentGroupType = levelGroups[0];            
+            EnemyGroupType currentGroupType = levelGroups[0];               
             levelGroups.RemoveAt(0);
 
             currentGroup = enemyGroupBuilder.buildEnemyGroup(currentGroupType, playerShip.gameObject);

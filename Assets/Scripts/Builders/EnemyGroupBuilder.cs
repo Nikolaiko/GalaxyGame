@@ -13,7 +13,7 @@ public class EnemyGroupBuilder : MonoBehaviour
 
     private List<BaseEnemyGroup> createdGroups = new List<BaseEnemyGroup>();
 
-    public BaseEnemyGroup buildEnemyGroup(EnemyGroupType groupType, GameObject playerShip) {
+    public BaseEnemyGroup buildEnemyGroup(EnemyGroupType groupType, GameObject playerShip) {        
         BaseEnemyGroup createdGroup;
         switch(groupType) {
             case EnemyGroupType.passive:

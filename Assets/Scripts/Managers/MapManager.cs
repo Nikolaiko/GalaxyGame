@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
+    public GameObject bossIcon;
+
     private UserDataRepository repository = new UserDataRepository();
     private List<LevelData> levels;
 
@@ -20,6 +22,9 @@ public class MapManager : MonoBehaviour
                 levelObjects[i].hide();
             } else {
                 levelObjects[i].show();
+                if (i == 3) {
+                    bossIcon.SetActive(true);
+                }
             }
         }
     }
