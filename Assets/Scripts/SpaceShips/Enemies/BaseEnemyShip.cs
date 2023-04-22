@@ -7,9 +7,12 @@ using UnityEngine;
 public class BaseEnemyShip : MonoBehaviour
 {
     public delegate void ShipDestroyDelegate(BaseEnemyShip ship);
+    public event ShipDestroyDelegate OnShipDestroyAnimationComplete;
     public event ShipDestroyDelegate OnShipDestroy;
 
     public GameObject exhaustObject;
+
+    protected EnemyShipType shipType;
 
     protected int health = 100;
     protected bool isAlive = true;
@@ -17,16 +20,16 @@ public class BaseEnemyShip : MonoBehaviour
     protected Animator shipAnimation;
     protected Collider2D shipCollider;
 
-    public void Awake() {
+    public virtual void Awake() {
         shipAnimation = GetComponent<Animator>();
         shipCollider = GetComponent<Collider2D>();
     }
 
-    public void releaseFromGroupTransform() {
+    public void ReleaseFromGroupTransform() {
         transform.parent = null;
     }
 
-    public void setAlive(bool aliveFlag) {
+    public void SetAlive(bool aliveFlag) {
         isAlive = aliveFlag;
     }
 
@@ -34,28 +37,36 @@ public class BaseEnemyShip : MonoBehaviour
         return isAlive;
     }
 
-    public void destroyShip() {
+    public EnemyShipType GetShipType() {
+        return shipType;
+    }
+
+    public void DestroyShipObject() {
         Destroy(gameObject);
     }
 
-    public void OnTriggerEnter2D(Collider2D otherCollider) {
-        print(shipAnimation);
+    public virtual void DestroyShip() {
+        exhaustObject.SetActive(false);
+        shipCollider.enabled = false;
+
+        ReleaseFromGroupTransform();
+        shipAnimation.SetBool("IsAlive", false);
+    }
+
+    public void OnTriggerEnter2D(Collider2D otherCollider) {        
         GameObject otherObject = otherCollider.gameObject;
         SimpleBullet bullet = otherCollider.GetComponent<SimpleBullet>();
         if (bullet != null) {
             health -= bullet.damage;
             Destroy(otherObject);
             if (health <= 0) {
-                exhaustObject.SetActive(false);
-                shipCollider.enabled = false;
-
-                releaseFromGroupTransform();
-                shipAnimation.SetBool("IsAlive", false);                
+                DestroyShip();
+                OnShipDestroy?.Invoke(this);   
             }
         }
     }
 
     public void OnDestroyAnimationComplete() {        
-        OnShipDestroy?.Invoke(this);
+        OnShipDestroyAnimationComplete?.Invoke(this);
     }
 }

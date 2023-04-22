@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface Destroyable
 {
-    void destroyObject();
+    void DestroyObject();
 }

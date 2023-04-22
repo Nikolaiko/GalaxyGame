@@ -8,7 +8,7 @@ public class ShotingEnemiesGroup : PassiveEnemiesGroup
     private static float shotingDelay = 0.5f;
     private static float shotinginterval = 2.5f;
 
-    protected List<ShotingEnemyShip> shotingShips = new List<ShotingEnemyShip>();
+    private List<ShotingEnemyShip> shotingShips = new List<ShotingEnemyShip>();
     protected System.Random generator = new System.Random();
 
     override public void Awake() {
@@ -22,7 +22,7 @@ public class ShotingEnemiesGroup : PassiveEnemiesGroup
         base.FixedUpdate();
     }
 
-    public void Start() {
+    public virtual void Start() {
         InvokeRepeating(shotingMethodName, shotingDelay, shotinginterval);
     }
 

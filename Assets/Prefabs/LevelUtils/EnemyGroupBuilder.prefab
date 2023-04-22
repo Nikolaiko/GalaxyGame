@@ -44,3 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2875a1feafe4107afa55967bdf902f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passiveGroup: {fileID: 5550518165890151767, guid: e23ff92399995415790d6b52135e18e5, type: 3}
+  shotingGroup: {fileID: 3117023176426810041, guid: 6d2dfc1f3943049d1a995578ddf75b48, type: 3}
+  shotingRamGroup: {fileID: 5109541037125444279, guid: 4b855fb69d5714b209725268a597c6bc, type: 3}
+  searchingGroup: {fileID: 3723537651014964500, guid: ed6f2878351fa4ad29c5c879e6d7d60e, type: 3}
+  blueBossGroup: {fileID: 1537572409999294288, guid: 2d2a19528bbee4cffa74930a9441ba30, type: 3}

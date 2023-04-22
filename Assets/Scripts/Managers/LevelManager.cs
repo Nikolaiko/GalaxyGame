@@ -10,19 +10,33 @@ public class LevelManager : MonoBehaviour
     public UILevelManager uiManager;
     public GameObject enemyStartingPoint;
     public GameObject playerStartingPoint;
-    
+
+
+    private ScoreManager scoreManager;
+    private StarRatingManager ratingManager;
+    private EnemyGroupsConfigManager groupsConfigManager;
     private UserDataRepository userDataRepository = new UserDataRepository();
     private int levelNumber;
+    private int userScore;
 
     private List<EnemyGroupType> levelGroups = new List<EnemyGroupType>();
     private BaseEnemyGroup currentGroup;
     private SpaceShip playerShip;
 
+    void Awake() {
+        scoreManager = GetComponent<ScoreManager>();
+        ratingManager = GetComponent<StarRatingManager>();
+        groupsConfigManager = GetComponent<EnemyGroupsConfigManager>();
+    }
+
     void Start()
-    {        
+    {
         userDataRepository.initRepository();
         levelNumber = userDataRepository.getCurrentLevel();
+        userScore = 0;
 
+        scoreManager.startLevel();
+        
         initEnemyGroups();
         buildPlayerShip();
         createNextGroup();
@@ -31,27 +45,35 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         if (currentGroup != null && currentGroup.isDead) {
-            currentGroup.destroyObject();            
+            currentGroup.DestroyObject();
+            currentGroup.OnGroupShipDestroy -= OnEnemyShipDestroy;     
             if (levelGroups.Count > 0) {
                 createNextGroup();
             } else {
-                playerShip.destroyObject();
+                playerShip.DestroyObject();
                 enemyGroupBuilder.removeAllGroups();
-                uiManager.showWinScreen();
 
-                userDataRepository.setLevelState(levelNumber, LevelState.completedOneStar);                
+                int rating = ratingManager.GetStarsRating(levelNumber, userScore, playerShip.GetHealth());
+                uiManager.SetUserRating(rating);
+                uiManager.ShowWinScreen();
+
+                userDataRepository.setLevelState(levelNumber, ConvertHelpers.LevelStateFromRating(rating));                
             }      
         } 
     }
 
     public void replayLevel() {
-        uiManager.hideWinScreen();
-        uiManager.hideLooseScreen();
+        userScore = 0;
+
+        uiManager.SetUserScore(userScore);
+        uiManager.HideWinScreen();
+        uiManager.HideLooseScreen();
+
         Start();
     }
 
     public void continueToMap() {
-        uiManager.hideWinScreen();
+        uiManager.HideWinScreen();
         SceneManager.LoadSceneAsync(SceneIDs.mapSceneId);
     }
 
@@ -60,8 +82,7 @@ public class LevelManager : MonoBehaviour
     }
 
     private void initEnemyGroups() {
-        levelGroups.Add(EnemyGroupType.shootingRam);
-        levelGroups.Add(EnemyGroupType.shootingRam);
+        levelGroups = groupsConfigManager.GetGroupTypesForLevel(levelNumber);                
     }
 
     private void buildPlayerShip() {
@@ -72,18 +93,26 @@ public class LevelManager : MonoBehaviour
 
     private void createNextGroup() {
         if (levelGroups.Count > 0) {
-            EnemyGroupType currentGroupType = levelGroups[0];            
+            EnemyGroupType currentGroupType = levelGroups[0];               
             levelGroups.RemoveAt(0);
 
-            currentGroup = enemyGroupBuilder.buildEnemyGroup(currentGroupType);
+            currentGroup = enemyGroupBuilder.buildEnemyGroup(currentGroupType, playerShip.gameObject);
             currentGroup.setPosition(enemyStartingPoint.transform.position);
+            currentGroup.OnGroupShipDestroy += OnEnemyShipDestroy;
         }        
     }
 
     private void OnPlayerDeath(SpaceShip player) {
-        playerShip.destroyObject();
+        playerShip.DestroyObject();
         enemyGroupBuilder.removeAllGroups();
 
-        uiManager.showLooseScreen();
+        int rating = ratingManager.GetStarsRating(levelNumber, userScore, playerShip.GetHealth());
+        uiManager.SetUserRating(rating);
+        uiManager.ShowLooseScreen();
     }
+
+    private void OnEnemyShipDestroy(EnemyShipType shipType) {
+        userScore += scoreManager.GetShipDestroyScore(shipType);
+        uiManager.SetUserScore(userScore);
+    }    
 }
